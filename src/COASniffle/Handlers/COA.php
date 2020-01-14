@@ -10,6 +10,7 @@
     use COASniffle\Exceptions\CoaAuthenticationException;
     use COASniffle\Exceptions\InvalidRedirectLocationException;
     use COASniffle\Exceptions\RedirectParameterMissingException;
+    use COASniffle\Exceptions\RequestFailedException;
     use COASniffle\Exceptions\UnsupportedAuthMethodException;
     use COASniffle\Utilities\RequestBuilder;
 
@@ -33,6 +34,22 @@
             $this->COASniffle = $COASniffle;
         }
 
+        /**
+         * Creates an authentication request which returns the Request Token and the Authentiction URL
+         *
+         * The array contains two values ('request_token', 'auth_url')
+         * The request_token is the token used to establish an authentication request
+         * The authentication URL is the URL that the user needs to open to authenticate to your Application
+         *
+         * @param string $redirect
+         * @return array
+         * @throws BadResponseException
+         * @throws CoaAuthenticationException
+         * @throws InvalidRedirectLocationException
+         * @throws RedirectParameterMissingException
+         * @throws RequestFailedException
+         * @throws UnsupportedAuthMethodException
+         */
         public function createAuthenticationRequest(string $redirect="None"): array
         {
             if(COA_SNIFFLE_APP_TYPE == ApplicationType::Redirect)
@@ -95,6 +112,7 @@
          * @throws RedirectParameterMissingException
          * @throws UnsupportedAuthMethodException
          * @throws InvalidRedirectLocationException
+         * @throws RequestFailedException
          */
         public function requestAuthentication(bool $include_host=True, string $redirect="None"): string
         {
