@@ -18,6 +18,7 @@
     include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'CoaAuthenticationException.php');
     include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'InvalidRedirectLocationException.php');
     include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'RedirectParameterMissingException.php');
+    include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'RequestFailedException.php');
     include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'UnsupportedAuthMethodException.php');
 
     include_once($LocalDirectory . 'Handlers' . DIRECTORY_SEPARATOR . 'COA.php');

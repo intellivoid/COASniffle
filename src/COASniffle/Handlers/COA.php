@@ -166,8 +166,14 @@
                 'action' => "request_authentication",
                 'application_id' => COA_SNIFFLE_APP_PUBLIC_ID,
                 'redirect' => $redirect,
-                'wrapper' => 'COASniffle'
+                'wrapper' => 'COASniffle',
+                'secured' => 'false'
             );
+
+            if(COA_SNIFFLE_SSL_ENABLED)
+            {
+                $Parameters['secured'] = 'true';
+            }
 
             $GetParameters = '?' . http_build_query($Parameters);
             return COA_SNIFFLE_ENDPOINT . '/auth/coa' . $GetParameters;

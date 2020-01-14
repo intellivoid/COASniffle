@@ -4,6 +4,7 @@
     namespace COASniffle\Utilities;
 
 
+    use COASniffle\Exceptions\RequestFailedException;
     use COASniffle\Exceptions\UnsupportedAuthMethodException;
 
     /**
@@ -20,6 +21,7 @@
          * @param array $payload
          * @return array
          * @throws UnsupportedAuthMethodException
+         * @throws RequestFailedException
          */
         public static function sendRequest(string $authMethod, array $parameters, array $payload): array
         {
@@ -54,6 +56,12 @@
             curl_setopt($CurlClient, CURLOPT_HEADER, 1);
             curl_setopt($CurlClient, CURLOPT_FOLLOWLOCATION, 0);
             $CurlResponse = curl_exec($CurlClient);
+
+            if(curl_errno($CurlClient))
+            {
+                throw new RequestFailedException(curl_error($CurlClient));
+            }
+
             $MethodReturnResponse = array(
                 'body' => $CurlResponse,
                 'content_type' => curl_getinfo($CurlClient, CURLINFO_CONTENT_TYPE),
