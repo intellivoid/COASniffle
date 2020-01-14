@@ -3,8 +3,10 @@
     use COASniffle\Abstracts\ApplicationType;
     use COASniffle\COASniffle;
     use COASniffle\Exceptions\ApplicationAlreadyDefinedException;
+use COASniffle\Exceptions\CoaAuthenticationException;
+use COASniffle\Exceptions\UnsupportedAuthMethodException;
 
-    $SourceDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src';
+$SourceDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src';
     require($SourceDirectory . DIRECTORY_SEPARATOR . 'COASniffle' . DIRECTORY_SEPARATOR . 'COASniffle.php');
 
     $ApplicationConfiguration = array(
@@ -25,8 +27,22 @@
     }
     catch (ApplicationAlreadyDefinedException $e)
     {
-        print("ERROR: The application was already defined before");
+        print("ERROR: The application was already defined before" . PHP_EOL);
         exit(0);
     }
 
-    $COASniffle->getCOA()->requestAuthentication();
+    try
+    {
+        $AuthenticationURL = $COASniffle->getCOA()->requestAuthentication();
+        print("Authenticate: " . $AuthenticationURL . PHP_EOL);
+    }
+    catch (CoaAuthenticationException $e)
+    {
+        print("COA ERROR (" . $e->getCode() . "): " . $e->getMessage() . PHP_EOL);
+        exit(0);
+    }
+    catch (UnsupportedAuthMethodException $e)
+    {
+        print("ERROR: The requested authentication method is unsupported in this library" . PHP_EOL);
+        exit(0);
+    }
