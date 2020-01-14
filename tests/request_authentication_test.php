@@ -6,7 +6,8 @@
     use COASniffle\Exceptions\CoaAuthenticationException;
     use COASniffle\Exceptions\InvalidRedirectLocationException;
     use COASniffle\Exceptions\RedirectParameterMissingException;
-    use COASniffle\Exceptions\UnsupportedAuthMethodException;
+use COASniffle\Exceptions\RequestFailedException;
+use COASniffle\Exceptions\UnsupportedAuthMethodException;
 
     $SourceDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src';
     require($SourceDirectory . DIRECTORY_SEPARATOR . 'COASniffle' . DIRECTORY_SEPARATOR . 'COASniffle.php');
@@ -59,5 +60,10 @@
     catch (RedirectParameterMissingException $e)
     {
         print("ERROR: The redirect parameter is missing" . PHP_EOL);
+        exit(0);
+    }
+    catch (RequestFailedException $e)
+    {
+        print("REQUEST FAILURE: " . $e->getCurlError() . PHP_EOL);
         exit(0);
     }
