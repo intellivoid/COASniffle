@@ -172,9 +172,39 @@ use COASniffle\Exceptions\UnsupportedAuthMethodException;
         exit(0);
     }
 
+    print("Getting User Information" . PHP_EOL);
+    try
+    {
+        $UserInformation = $COASniffle->getCOA()->getUser($AccessToken);
+    }
+    catch (BadResponseException $e)
+    {
+        print("ERROR: The server returned a response which cannot be parsed" . PHP_EOL);
+        exit(0);
+    }
+    catch (CoaAuthenticationException $e)
+    {
+        print("COA ERROR (" . $e->getCode() . "): " . $e->getMessage() . PHP_EOL);
+        exit(0);
+    }
+    catch (RequestFailedException $e)
+    {
+        print("REQUEST FAILURE: " . $e->getCurlError() . PHP_EOL);
+        exit(0);
+    }
+    catch (UnsupportedAuthMethodException $e)
+    {
+        print("ERROR: The requested authentication method is unsupported in this library" . PHP_EOL);
+        exit(0);
+    }
+
+    print(PHP_EOL);
     print("-- GRANTED PERMISSIONS --" . PHP_EOL);
     print("     View Public Information     : " . json_encode($GrantedPermissions->ViewPublicInformation) . PHP_EOL);
     print("     View Email Address          : " . json_encode($GrantedPermissions->ViewEmailAddress) . PHP_EOL);
     print("     Read Personal Information   : " . json_encode($GrantedPermissions->ReadPersonalInformation) . PHP_EOL);
     print("     Send Telegram Notification  : " . json_encode($GrantedPermissions->SendTelegramNotifications) . PHP_EOL);
     print("     Make Purchases              : " . json_encode($GrantedPermissions->MakePurchases) . PHP_EOL);
+    print(PHP_EOL);
+    print("-- USER INFORMATION --" . PHP_EOL);
+    print(json_encode($UserInformation->toArray(), JSON_PRETTY_PRINT));

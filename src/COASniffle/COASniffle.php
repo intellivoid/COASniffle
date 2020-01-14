@@ -25,7 +25,7 @@
 
     include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation' . DIRECTORY_SEPARATOR . 'Avatar.php');
     include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation' . DIRECTORY_SEPARATOR . 'EmailAddress.php');
-    include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation' . DIRECTORY_SEPARATOR . 'PersonalInformation');
+    include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation' . DIRECTORY_SEPARATOR . 'PersonalInformation.php');
     include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation' . DIRECTORY_SEPARATOR . 'PersonalInformation' . DIRECTORY_SEPARATOR . 'Birthday.php');
     include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation' . DIRECTORY_SEPARATOR . 'PersonalInformation' . DIRECTORY_SEPARATOR . 'FirstName.php');
     include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation' . DIRECTORY_SEPARATOR . 'PersonalInformation' . DIRECTORY_SEPARATOR . 'LastName.php');
