@@ -13,8 +13,12 @@
     include_once($LocalDirectory . 'Abstracts' . DIRECTORY_SEPARATOR . 'ApplicationType.php');
 
     include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'ApplicationAlreadyDefinedException.php');
+    include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'UnsupportedAuthMethodException.php');
 
     include_once($LocalDirectory . 'Handlers' . DIRECTORY_SEPARATOR . 'COA.php');
+
+    include_once($LocalDirectory . 'Utilities' . DIRECTORY_SEPARATOR . 'ErrorResolver.php');
+    include_once($LocalDirectory . 'Utilities' . DIRECTORY_SEPARATOR . 'RequestBuilder.php');
 
     include_once($LocalDirectory . 'AutoConfig.php');
 
@@ -52,6 +56,17 @@
                 print("There was an error while trying to parse the ACM configuration");
                 print($e->getMessage());
                 exit(0);
+            }
+
+            if(strtolower($this->EndpointConfiguration['LocalDevelopment']) == "true")
+            {
+                define("COA_SNIFFLE_LOCAL_DEVELOPMENT_ENABLED", true);
+                define("COA_SNIFFLE_ENDPOINT", $this->EndpointConfiguration['LocalEndpoint']);
+            }
+            else
+            {
+                define("COA_SNIFFLE_LOCAL_DEVELOPMENT_ENABLED", false);
+                define("COA_SNIFFLE_ENDPOINT", $this->EndpointConfiguration['ProductionEndpoint']);
             }
         }
 
