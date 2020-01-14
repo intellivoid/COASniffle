@@ -6,6 +6,7 @@
     use acm\acm;
     use COASniffle\Abstracts\ApplicationType;
     use COASniffle\Exceptions\ApplicationAlreadyDefinedException;
+    use COASniffle\Handlers\COA;
     use Exception;
 
     $LocalDirectory = __DIR__ . DIRECTORY_SEPARATOR;
@@ -38,6 +39,10 @@
          * @var mixed
          */
         private $EndpointConfiguration;
+        /**
+         * @var COA
+         */
+        private $COA;
 
         /**
          * COASniffle constructor.
@@ -45,7 +50,7 @@
         public function __construct()
         {
             /** @noinspection PhpParamsInspection */
-            $this->acm = new acm(__DIR__ . 'COASniffle');
+            $this->acm = new acm(__DIR__, 'COASniffle');
 
             try
             {
@@ -68,6 +73,8 @@
                 define("COA_SNIFFLE_LOCAL_DEVELOPMENT_ENABLED", false);
                 define("COA_SNIFFLE_ENDPOINT", $this->EndpointConfiguration['ProductionEndpoint']);
             }
+
+            $this->COA = new COA($this);
         }
 
         /**
@@ -114,5 +121,13 @@
         public function getEndpointConfiguration()
         {
             return $this->EndpointConfiguration;
+        }
+
+        /**
+         * @return COA
+         */
+        public function getCOA(): COA
+        {
+            return $this->COA;
         }
     }

@@ -28,3 +28,5 @@
         print("ERROR: The application was already defined before");
         exit(0);
     }
+
+    $COASniffle->getCOA()->requestAuthentication();

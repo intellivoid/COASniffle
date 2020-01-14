@@ -40,27 +40,35 @@
             $RequestUrl = COA_SNIFFLE_ENDPOINT . '/auth/' . $authMethod . $GetParameters;
 
             $CurlClient = curl_init($RequestUrl);
-            curl_setopt($CurlClient, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($CurlClient, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($CurlClient, CURLOPT_POSTFIELDS, $payload);
-            curl_setopt($CurlClient, CURLOPT_HEADER, true);
-            curl_setopt($CurlClient, CURLOPT_FOLLOWLOCATION, false);
+            curl_setopt($CurlClient, CURLOPT_HEADER, 1);
+            curl_setopt($CurlClient, CURLOPT_FOLLOWLOCATION, 0);
             $CurlResponse = curl_exec($CurlClient);
-            curl_close($CurlClient);
-
-            $response_method = array(
+            $MethodReturnResponse = array(
                 'body' => $CurlResponse,
                 'content_type' => curl_getinfo($CurlClient, CURLINFO_CONTENT_TYPE),
-                'response_code' => curl_getinfo($CurlClient, CURLINFO_HTTP_CODE)
+                'response_code' => curl_getinfo($CurlClient, CURLINFO_HTTP_CODE),
+                'redirect_location' => null,
+                'x_coa_error' => null
             );
 
-            if (preg_match('~Location: (.*)~i', $CurlResponse, $match)) {
-                $response_method['redirect_location'] = trim($match[1]);
-            }
-            else
+            $HeaderSize = curl_getinfo($CurlClient, CURLINFO_HEADER_SIZE);
+            $MethodReturnResponse['headers'] = substr($CurlResponse, 0, $HeaderSize);
+            $MethodReturnResponse['content'] = substr($CurlResponse, $HeaderSize);
+
+            curl_close($CurlClient);
+
+            if (preg_match('~Location: (.*)~i', $CurlResponse, $match))
             {
-                $response_method['redirect_location'] = trim($match[1]);
+                $MethodReturnResponse['redirect_location'] = trim($match[1]);
             }
 
-            return $response_method;
+            if (preg_match('~X-COA-Error: (.*)~i', $CurlResponse, $match))
+            {
+                $MethodReturnResponse['x_coa_error'] = (int)trim($match[1]);
+            }
+
+            return $MethodReturnResponse;
         }
     }
