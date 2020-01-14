@@ -72,4 +72,59 @@
                 'personal_information' => $this->PersonalInformation->toArray()
             );
         }
+
+        /**
+         * Constructs object from array
+         *
+         * @param array $data
+         * @return UserInformation
+         */
+        public static function fromArray(array $data): UserInformation
+        {
+            $UserInformationObject = new UserInformation();
+
+            if(isset($data['tag']))
+            {
+                $UserInformationObject->Tag = (int)$data['tag'];
+            }
+
+            if(isset($data['public_id']))
+            {
+                $UserInformationObject->PublicID = $data['public_id'];
+            }
+
+            if(isset($data['username']))
+            {
+                $UserInformationObject->Username = $data['username'];
+            }
+
+            if(isset($data['avatar']))
+            {
+                $UserInformationObject->Avatar = Avatar::fromArray($data['avatar']);
+            }
+            else
+            {
+                $UserInformationObject->Avatar = Avatar::fromArray(array());
+            }
+
+            if(isset($data['email_address']))
+            {
+                $UserInformationObject->EmailAddress = EmailAddress::fromArray($data['email_address']);
+            }
+            else
+            {
+                $UserInformationObject->EmailAddress = EmailAddress::fromArray(array());
+            }
+
+            if(isset($data['personal_information']))
+            {
+                $UserInformationObject->PersonalInformation = PersonalInformation::fromArray($data['personal_information']);
+            }
+            else
+            {
+                $UserInformationObject->PersonalInformation = PersonalInformation::fromArray(array());
+            }
+
+            return $UserInformationObject;
+        }
     }
