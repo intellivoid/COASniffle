@@ -1,10 +1,10 @@
 <?php
 
 
-namespace COASniffle\Handlers;
+    namespace COASniffle\Handlers;
 
 
-class COA
-{
+    class COA
+    {
 
-}
+    }

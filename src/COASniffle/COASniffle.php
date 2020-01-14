@@ -3,7 +3,18 @@
 
     namespace COASniffle;
 
+    use acm\acm;
+    use COASniffle\Abstracts\ApplicationType;
+    use COASniffle\Exceptions\ApplicationAlreadyDefinedException;
+    use Exception;
+
     $LocalDirectory = __DIR__ . DIRECTORY_SEPARATOR;
+
+    include_once($LocalDirectory . 'Abstracts' . DIRECTORY_SEPARATOR . 'ApplicationType.php');
+
+    include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'ApplicationAlreadyDefinedException.php');
+
+    include_once($LocalDirectory . 'Handlers' . DIRECTORY_SEPARATOR . 'COA.php');
 
     include_once($LocalDirectory . 'AutoConfig.php');
 
@@ -14,5 +25,79 @@
 
     class COASniffle
     {
+        /**
+         * @var acm
+         */
+        private $acm;
 
+        /**
+         * @var mixed
+         */
+        private $EndpointConfiguration;
+
+        /**
+         * COASniffle constructor.
+         */
+        public function __construct()
+        {
+            /** @noinspection PhpParamsInspection */
+            $this->acm = new acm(__DIR__ . 'COASniffle');
+
+            try
+            {
+                $this->EndpointConfiguration = $this->acm->getConfiguration('Endpoint');
+            }
+            catch (Exception $e)
+            {
+                print("There was an error while trying to parse the ACM configuration");
+                print($e->getMessage());
+                exit(0);
+            }
+        }
+
+        /**
+         * Defines the Application Keys and Type in memory
+         *
+         * @param string $publicApplicationID
+         * @param string $secretKey
+         * @param ApplicationType|string $applicationType
+         * @throws ApplicationAlreadyDefinedException
+         */
+        public function defineApplication(string $publicApplicationID, string $secretKey, string $applicationType)
+        {
+            if(defined("COA_SNIFFLE_APP_PUBLIC_ID"))
+            {
+                throw new ApplicationAlreadyDefinedException();
+            }
+
+            if(defined("COA_SNIFFLE_APP_SECRET_KEY"))
+            {
+                throw new ApplicationAlreadyDefinedException();
+            }
+
+            if(defined("COA_SNIFFLE_APP_TYPE"))
+            {
+                throw new ApplicationAlreadyDefinedException();
+            }
+
+            define("COA_SNIFFLE_APP_PUBLIC_ID", $publicApplicationID);
+            define("COA_SNIFFLE_APP_SECRET_KEY", $secretKey);
+            define("COA_SNIFFLE_APP_TYPE", $applicationType);
+        }
+
+        /**
+         * @return acm
+         */
+        public function getAcm()
+        {
+            return $this->acm;
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getEndpointConfiguration()
+        {
+            return $this->EndpointConfiguration;
+        }
     }
