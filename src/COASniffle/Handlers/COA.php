@@ -33,7 +33,7 @@
         }
 
         /**
-         * Returns the location for the user to authenticate to
+         * Requests for authentication and Returns the location for the user to authenticate to
          *
          * @param bool $include_host
          * @param string $redirect
@@ -60,7 +60,7 @@
 
             $Response = RequestBuilder::sendRequest(
                 'coa', array(
-                    'action' => "request_authentication"
+                    'action' => "request_authentication",
                 ),
                 array(
                     'application_id' => COA_SNIFFLE_APP_PUBLIC_ID,
@@ -79,5 +79,40 @@
             }
 
             return $Response['redirect_location'];
+        }
+
+        /**
+         * Builds the authentication request URL only where the request token would be created
+         * upon request
+         *
+         * @param string $redirect
+         * @return string
+         * @throws InvalidRedirectLocationException
+         * @throws RedirectParameterMissingException
+         */
+        public function getAuthenticationURL(string $redirect="None"): string
+        {
+            if(COA_SNIFFLE_APP_TYPE == ApplicationType::Redirect)
+            {
+                if($redirect == "None")
+                {
+                    throw new RedirectParameterMissingException();
+                }
+
+                if(filter_var($redirect, FILTER_VALIDATE_URL) == false)
+                {
+                    throw new InvalidRedirectLocationException();
+                }
+            }
+
+            $Parameters = array(
+                'action' => "request_authentication",
+                'application_id' => COA_SNIFFLE_APP_PUBLIC_ID,
+                'redirect' => $redirect,
+                'wrapper' => 'COASniffle'
+            );
+
+            $GetParameters = '?' . http_build_query($Parameters);
+            return COA_SNIFFLE_ENDPOINT . '/auth/coa' . $GetParameters;
         }
     }

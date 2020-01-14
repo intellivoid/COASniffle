@@ -3,10 +3,8 @@
     use COASniffle\Abstracts\ApplicationType;
     use COASniffle\COASniffle;
     use COASniffle\Exceptions\ApplicationAlreadyDefinedException;
-    use COASniffle\Exceptions\CoaAuthenticationException;
     use COASniffle\Exceptions\InvalidRedirectLocationException;
     use COASniffle\Exceptions\RedirectParameterMissingException;
-    use COASniffle\Exceptions\UnsupportedAuthMethodException;
 
     $SourceDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src';
     require($SourceDirectory . DIRECTORY_SEPARATOR . 'COASniffle' . DIRECTORY_SEPARATOR . 'COASniffle.php');
@@ -36,20 +34,8 @@
 
     try
     {
-        $AuthenticationURL = $COASniffle->getCOA()->requestAuthentication(
-            True, $ApplicationConfiguration['Redirect']
-        );
-        print("Request Authentication URL: " . $AuthenticationURL . PHP_EOL);
-    }
-    catch (CoaAuthenticationException $e)
-    {
-        print("COA ERROR (" . $e->getCode() . "): " . $e->getMessage() . PHP_EOL);
-        exit(0);
-    }
-    catch (UnsupportedAuthMethodException $e)
-    {
-        print("ERROR: The requested authentication method is unsupported in this library" . PHP_EOL);
-        exit(0);
+        $AuthenticationURL = $COASniffle->getCOA()->getAuthenticationURL($ApplicationConfiguration['Redirect']);
+        print("Create Authentication Request URL: " . $AuthenticationURL . PHP_EOL);
     }
     catch (InvalidRedirectLocationException $e)
     {

@@ -36,6 +36,7 @@
             }
 
             // Build the data
+            $parameters['wrapper'] = 'COASniffle';
             $GetParameters = '?' . http_build_query($parameters);
             $RequestUrl = COA_SNIFFLE_ENDPOINT . '/auth/' . $authMethod . $GetParameters;
 
