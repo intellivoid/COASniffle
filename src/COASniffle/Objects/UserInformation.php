@@ -4,6 +4,9 @@
     namespace COASniffle\Objects;
 
 
+    use COASniffle\Objects\UserInformation\EmailAddress;
+    use COASniffle\Objects\UserInformation\PersonalInformation;
+
     class UserInformation
     {
         /**
@@ -37,14 +40,14 @@
         /**
          * The user's Email Address
          *
-         * @var mixed
+         * @var EmailAddress
          */
         public $EmailAddress;
 
         /**
          * The user's Personal Information
          *
-         * @var mixed
+         * @var PersonalInformation
          */
         public $PersonalInformation;
     }
