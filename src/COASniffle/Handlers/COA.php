@@ -7,6 +7,7 @@
     use COASniffle\Abstracts\ApplicationType;
     use COASniffle\COASniffle;
     use COASniffle\Exceptions\CoaAuthenticationException;
+    use COASniffle\Exceptions\InvalidRedirectLocationException;
     use COASniffle\Exceptions\RedirectParameterMissingException;
     use COASniffle\Exceptions\UnsupportedAuthMethodException;
     use COASniffle\Utilities\RequestBuilder;
@@ -40,6 +41,7 @@
          * @throws CoaAuthenticationException
          * @throws RedirectParameterMissingException
          * @throws UnsupportedAuthMethodException
+         * @throws InvalidRedirectLocationException
          */
         public function requestAuthentication(bool $include_host=True, string $redirect="None"): string
         {
@@ -49,6 +51,11 @@
                 {
                     throw new RedirectParameterMissingException();
                 }
+
+                if(filter_var($redirect, FILTER_VALIDATE_URL) == false)
+                {
+                    throw new InvalidRedirectLocationException();
+                }
             }
 
             $Response = RequestBuilder::sendRequest(
@@ -56,7 +63,8 @@
                     'action' => "request_authentication"
                 ),
                 array(
-                    'application_id' => COA_SNIFFLE_APP_PUBLIC_ID
+                    'application_id' => COA_SNIFFLE_APP_PUBLIC_ID,
+                    'redirect' => $redirect
                 )
             );
 

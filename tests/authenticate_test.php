@@ -4,6 +4,8 @@
     use COASniffle\COASniffle;
     use COASniffle\Exceptions\ApplicationAlreadyDefinedException;
 use COASniffle\Exceptions\CoaAuthenticationException;
+use COASniffle\Exceptions\InvalidRedirectLocationException;
+use COASniffle\Exceptions\RedirectParameterMissingException;
 use COASniffle\Exceptions\UnsupportedAuthMethodException;
 
 $SourceDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'src';
@@ -12,7 +14,8 @@ $SourceDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 
     $ApplicationConfiguration = array(
         "PublicID" => "APP4e89d34d6756306f5b90684922458a6a3db0ee38a06147e08f4692ddda4c9094920bcd5d",
         "SecretKey" => "0f2135ff26f0ee4c19ce1fd0ecd6ad70cf50ab6160f089186f0d9cf9a7348ef84c09536f",
-        "Type" => ApplicationType::Redirect
+        "Type" => ApplicationType::Redirect,
+        "Redirect" => "http://localhost:5002/"
     );
 
     $COASniffle = new COASniffle();
@@ -33,7 +36,9 @@ $SourceDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 
 
     try
     {
-        $AuthenticationURL = $COASniffle->getCOA()->requestAuthentication();
+        $AuthenticationURL = $COASniffle->getCOA()->requestAuthentication(
+            True, $ApplicationConfiguration['Redirect']
+        );
         print("Authenticate: " . $AuthenticationURL . PHP_EOL);
     }
     catch (CoaAuthenticationException $e)
@@ -44,5 +49,15 @@ $SourceDirectory = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 
     catch (UnsupportedAuthMethodException $e)
     {
         print("ERROR: The requested authentication method is unsupported in this library" . PHP_EOL);
+        exit(0);
+    }
+    catch (InvalidRedirectLocationException $e)
+    {
+        print("ERROR: The given redirect location is invalid" . PHP_EOL);
+        exit(0);
+    }
+    catch (RedirectParameterMissingException $e)
+    {
+        print("ERROR: The redirect parameter is missing" . PHP_EOL);
         exit(0);
     }
