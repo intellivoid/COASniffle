@@ -6,6 +6,7 @@
 
     use COASniffle\Abstracts\ApplicationType;
     use COASniffle\COASniffle;
+    use COASniffle\Exceptions\BadResponseException;
     use COASniffle\Exceptions\CoaAuthenticationException;
     use COASniffle\Exceptions\InvalidRedirectLocationException;
     use COASniffle\Exceptions\RedirectParameterMissingException;
@@ -58,11 +59,21 @@
                 )
             );
 
-            $ResponseJson = json_encode($Response['content']);
+            $ResponseJson = json_decode($Response['content'], true);
             if($ResponseJson == false)
             {
-
+                throw new BadResponseException();
             }
+
+            if($ResponseJson['status'] == false)
+            {
+                throw new CoaAuthenticationException($ResponseJson['error_code']);
+            }
+
+            return array(
+                'request_token' => $ResponseJson['request_token'],
+                'auth_url' => $ResponseJson['auth_url']
+            );
 
         }
 
