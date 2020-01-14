@@ -34,13 +34,14 @@
         /**
          * Returns the location for the user to authenticate to
          *
+         * @param bool $include_host
          * @param string $redirect
          * @return string
          * @throws CoaAuthenticationException
-         * @throws UnsupportedAuthMethodException
          * @throws RedirectParameterMissingException
+         * @throws UnsupportedAuthMethodException
          */
-        public function requestAuthentication(string $redirect="None"): string
+        public function requestAuthentication(bool $include_host=True, string $redirect="None"): string
         {
             if(COA_SNIFFLE_APP_TYPE == ApplicationType::Redirect)
             {
@@ -62,6 +63,11 @@
             if(is_null($Response['x_coa_error']) == false)
             {
                 throw new CoaAuthenticationException($Response['x_coa_error']);
+            }
+
+            if($include_host)
+            {
+                return COA_SNIFFLE_ENDPOINT . $Response['redirect_location'];
             }
 
             return $Response['redirect_location'];
