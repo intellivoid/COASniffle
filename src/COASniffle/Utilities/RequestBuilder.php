@@ -37,6 +37,14 @@
 
             // Build the data
             $parameters['wrapper'] = 'COASniffle';
+            if(COA_SNIFFLE_SSL_ENABLED)
+            {
+                $parameters['secured'] = 'true';
+            }
+            else
+            {
+                $parameters['secured'] = 'false';
+            }
             $GetParameters = '?' . http_build_query($parameters);
             $RequestUrl = COA_SNIFFLE_ENDPOINT . '/auth/' . $authMethod . $GetParameters;
 

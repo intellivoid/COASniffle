@@ -69,12 +69,33 @@
             if(strtolower($this->EndpointConfiguration['LocalDevelopment']) == "true")
             {
                 define("COA_SNIFFLE_LOCAL_DEVELOPMENT_ENABLED", true);
-                define("COA_SNIFFLE_ENDPOINT", $this->EndpointConfiguration['LocalEndpoint']);
+
+                if(strtolower($this->EndpointConfiguration['EnableSSL']) == "true")
+                {
+                    define("COA_SNIFFLE_SSL_ENABLED", true);
+                    define("COA_SNIFFLE_ENDPOINT", 'https://' . $this->EndpointConfiguration['LocalEndpoint']);
+                }
+                else
+                {
+                    define("COA_SNIFFLE_SSL_ENABLED", false);
+                    define("COA_SNIFFLE_ENDPOINT", 'http://' . $this->EndpointConfiguration['LocalEndpoint']);
+                }
+
             }
             else
             {
                 define("COA_SNIFFLE_LOCAL_DEVELOPMENT_ENABLED", false);
-                define("COA_SNIFFLE_ENDPOINT", $this->EndpointConfiguration['ProductionEndpoint']);
+
+                if(strtolower($this->EndpointConfiguration['EnableSSL']) == "true")
+                {
+                    define("COA_SNIFFLE_SSL_ENABLED", true);
+                    define("COA_SNIFFLE_ENDPOINT", 'https://' . $this->EndpointConfiguration['ProductionEndpoint']);
+                }
+                else
+                {
+                    define("COA_SNIFFLE_SSL_ENABLED", false);
+                    define("COA_SNIFFLE_ENDPOINT", 'http://' . $this->EndpointConfiguration['ProductionEndpoint']);
+                }
             }
 
             $this->COA = new COA($this);

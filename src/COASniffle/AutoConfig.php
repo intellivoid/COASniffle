@@ -16,7 +16,8 @@
 
     // Database Schema Configuration
     $EndpointSchema = new Schema();
-    $EndpointSchema->setDefinition('LocalDevelopment', 'True');
+    $EndpointSchema->setDefinition('LocalDevelopment', 'False');
+    $EndpointSchema->setDefinition('EnableSSL', 'True');
     $EndpointSchema->setDefinition('LocalEndpoint', 'http://localhost');
     $EndpointSchema->setDefinition('ProductionEndpoint', 'https://accounts.intellivoid.info');
     $acm->defineSchema('Endpoint', $EndpointSchema);
