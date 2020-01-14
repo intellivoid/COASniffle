@@ -14,6 +14,7 @@
     include_once($LocalDirectory . 'Abstracts' . DIRECTORY_SEPARATOR . 'ApplicationType.php');
 
     include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'ApplicationAlreadyDefinedException.php');
+    include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'BadResponseException.php');
     include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'CoaAuthenticationException.php');
     include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'InvalidRedirectLocationException.php');
     include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'RedirectParameterMissingException.php');

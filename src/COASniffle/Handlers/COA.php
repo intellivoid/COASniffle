@@ -32,7 +32,7 @@
             $this->COASniffle = $COASniffle;
         }
 
-        public function createAuthenticationRequest()
+        public function createAuthenticationRequest(string $redirect="None"): array
         {
             if(COA_SNIFFLE_APP_TYPE == ApplicationType::Redirect)
             {
@@ -46,6 +46,24 @@
                     throw new InvalidRedirectLocationException();
                 }
             }
+
+            $Response = RequestBuilder::sendRequest(
+                'coa',
+                array(
+                    'action' => "create_authentication_request",
+                ),
+                array(
+                    'application_id' => COA_SNIFFLE_APP_PUBLIC_ID,
+                    'redirect' => $redirect
+                )
+            );
+
+            $ResponseJson = json_encode($Response['content']);
+            if($ResponseJson == false)
+            {
+
+            }
+
         }
 
         /**
@@ -83,7 +101,8 @@
             }
 
             $Response = RequestBuilder::sendRequest(
-                'coa', array(
+                'coa',
+                array(
                     'action' => "request_authentication",
                 ),
                 array(
