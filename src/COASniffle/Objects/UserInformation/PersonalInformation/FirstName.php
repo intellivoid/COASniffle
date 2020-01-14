@@ -31,7 +31,7 @@
         public function toArray(): array
         {
             return array(
-                'available' => $this->Available,
+                'available' => (bool)$this->Available,
                 'value' => $this->Value
             );
         }
