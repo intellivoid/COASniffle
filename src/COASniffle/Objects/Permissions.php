@@ -50,6 +50,7 @@
         public function toArray()
         {
             return array(
+                'view_public_information' => $this->ViewPublicInformation,
                 'view_email_address' => $this->ViewEmailAddress,
                 'read_personal_information' => $this->ReadPersonalInformation,
                 'send_telegram_notifications' => $this->SendTelegramNotifications,
@@ -66,6 +67,15 @@
         public static function fromArray(array $data): Permissions
         {
             $PermissionsObject = new Permissions();
+
+            if(isset($data['view_public_information']))
+            {
+                $PermissionsObject->ViewPublicInformation = $data['view_public_information'];
+            }
+            else
+            {
+                $PermissionsObject->ViewPublicInformation = false;
+            }
 
             if(isset($data['view_email_address']))
             {

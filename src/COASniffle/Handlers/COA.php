@@ -12,6 +12,7 @@
     use COASniffle\Exceptions\RedirectParameterMissingException;
     use COASniffle\Exceptions\RequestFailedException;
     use COASniffle\Exceptions\UnsupportedAuthMethodException;
+    use COASniffle\Objects\Permissions;
     use COASniffle\Utilities\RequestBuilder;
 
     /**
@@ -195,6 +196,44 @@
             }
 
             return $ResponseJson['access_token'];
+        }
+
+        /**
+         * Checks what permissions the user has granted to the Application
+         *
+         * @param string $access_token
+         * @return Permissions
+         * @throws BadResponseException
+         * @throws CoaAuthenticationException
+         * @throws RequestFailedException
+         * @throws UnsupportedAuthMethodException
+         */
+        public function checkPermissions(string $access_token): Permissions
+        {
+            $Response = RequestBuilder::sendRequest(
+                'coa',
+                array(
+                    'action' => "check_permissions",
+                ),
+                array(
+                    'application_id' => COA_SNIFFLE_APP_PUBLIC_ID,
+                    'secret_key' => COA_SNIFFLE_APP_SECRET_KEY,
+                    'access_token' => $access_token
+                )
+            );
+
+            $ResponseJson = json_decode($Response['content'], true);
+            if($ResponseJson == false)
+            {
+                throw new BadResponseException();
+            }
+
+            if($ResponseJson['status'] == false)
+            {
+                throw new CoaAuthenticationException($ResponseJson['error_code']);
+            }
+
+            return Permissions::fromArray($ResponseJson['permissions']);
         }
 
         /**

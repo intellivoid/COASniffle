@@ -112,7 +112,7 @@ use COASniffle\Exceptions\UnsupportedAuthMethodException;
                 }
                 catch (UnsupportedAuthMethodException $e)
                 {
-                    print("ERROR: The server returned a response which cannot be parsed" . PHP_EOL);
+                    print("ERROR: The requested authentication method is unsupported in this library" . PHP_EOL);
                     exit(0);
                 }
 
@@ -146,4 +146,35 @@ use COASniffle\Exceptions\UnsupportedAuthMethodException;
     print("Access Token: " . $AccessToken . PHP_EOL);
     print(PHP_EOL);
 
-    print("Requesting User Information");
+    print("Checking Permissions" . PHP_EOL);
+    try
+    {
+        $GrantedPermissions = $COASniffle->getCOA()->checkPermissions($AccessToken);
+    }
+    catch (BadResponseException $e)
+    {
+        print("ERROR: The server returned a response which cannot be parsed" . PHP_EOL);
+        exit(0);
+    }
+    catch (CoaAuthenticationException $e)
+    {
+        print("COA ERROR (" . $e->getCode() . "): " . $e->getMessage() . PHP_EOL);
+        exit(0);
+    }
+    catch (RequestFailedException $e)
+    {
+        print("REQUEST FAILURE: " . $e->getCurlError() . PHP_EOL);
+        exit(0);
+    }
+    catch (UnsupportedAuthMethodException $e)
+    {
+        print("ERROR: The requested authentication method is unsupported in this library" . PHP_EOL);
+        exit(0);
+    }
+
+    print("-- GRANTED PERMISSIONS --" . PHP_EOL);
+    print("     View Public Information     : " . json_encode($GrantedPermissions->ViewPublicInformation) . PHP_EOL);
+    print("     View Email Address          : " . json_encode($GrantedPermissions->ViewEmailAddress) . PHP_EOL);
+    print("     Read Personal Information   : " . json_encode($GrantedPermissions->ReadPersonalInformation) . PHP_EOL);
+    print("     Send Telegram Notification  : " . json_encode($GrantedPermissions->SendTelegramNotifications) . PHP_EOL);
+    print("     Make Purchases              : " . json_encode($GrantedPermissions->MakePurchases) . PHP_EOL);
