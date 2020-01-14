@@ -23,7 +23,9 @@
 
     include_once($LocalDirectory . 'Handlers' . DIRECTORY_SEPARATOR . 'COA.php');
 
+    include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation' . DIRECTORY_SEPARATOR . 'EmailAddress.php');
     include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'Permissions.php');
+    include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation.php');
 
     include_once($LocalDirectory . 'Utilities' . DIRECTORY_SEPARATOR . 'ErrorResolver.php');
     include_once($LocalDirectory . 'Utilities' . DIRECTORY_SEPARATOR . 'RequestBuilder.php');
