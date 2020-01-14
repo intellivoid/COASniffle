@@ -16,7 +16,7 @@ use COASniffle\Exceptions\UnsupportedAuthMethodException;
     $ApplicationConfiguration = array(
         "PublicID" => "APP4e89d34d6756306f5b90684922458a6a3db0ee38a06147e08f4692ddda4c9094920bcd5d",
         "SecretKey" => "0f2135ff26f0ee4c19ce1fd0ecd6ad70cf50ab6160f089186f0d9cf9a7348ef84c09536f",
-        "Type" => ApplicationType::Redirect,
+        "Type" => ApplicationType::ApplicationPlaceholder,
         "Redirect" => "http://localhost:5002/"
     );
 
@@ -72,3 +72,78 @@ use COASniffle\Exceptions\UnsupportedAuthMethodException;
         print("ERROR: The requested authentication method is unsupported in this library" . PHP_EOL);
         exit(0);
     }
+
+    print(PHP_EOL);
+    $AccessToken = null;
+
+    switch(COA_SNIFFLE_APP_TYPE)
+    {
+        case ApplicationType::Redirect:
+            print("Success! Once authenticated the user will be redirected to the redirection URL" . PHP_EOL);
+            print("with a GET parameter included called 'access_token', using that you can" . PHP_EOL);
+            print("interact with the user's account." . PHP_EOL);
+            exit(0);
+            break;
+
+        case ApplicationType::ApplicationPlaceholder:
+
+            print("Waiting for User Authentication");
+
+            while(True)
+            {
+                try
+                {
+                    $AccessToken = $COASniffle->getCOA()->getAccessToken($AuthenticationRequest['request_token']);
+                }
+                catch (BadResponseException $e)
+                {
+                    print("ERROR: The server returned a response which cannot be parsed" . PHP_EOL);
+                    exit(0);
+                }
+                catch (CoaAuthenticationException $e)
+                {
+                    print("COA ERROR (" . $e->getCode() . "): " . $e->getMessage() . PHP_EOL);
+                    exit(0);
+                }
+                catch (RequestFailedException $e)
+                {
+                    print("REQUEST FAILURE: " . $e->getCurlError() . PHP_EOL);
+                    exit(0);
+                }
+                catch (UnsupportedAuthMethodException $e)
+                {
+                    print("ERROR: The server returned a response which cannot be parsed" . PHP_EOL);
+                    exit(0);
+                }
+
+                if(is_null($AccessToken))
+                {
+                    print(".");
+                    sleep(1);
+                }
+                else
+                {
+                    print("Done" . PHP_EOL);
+                    break;
+                }
+            }
+
+            break;
+
+        case ApplicationType::Code:
+            if (PHP_OS == 'WINNT')
+            {
+                echo 'Enter Access Toke: ';
+                $AccessToken = stream_get_line(STDIN, 1024, PHP_EOL);
+            }
+            else
+            {
+                $AccessToken = readline('Enter Access Token ');
+            }
+            break;
+    }
+
+    print("Access Token: " . $AccessToken . PHP_EOL);
+    print(PHP_EOL);
+
+    print("Requesting User Information");

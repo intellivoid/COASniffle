@@ -91,7 +91,6 @@
                 'request_token' => $ResponseJson['request_token'],
                 'auth_url' => $ResponseJson['auth_url']
             );
-
         }
 
         /**
@@ -151,6 +150,51 @@
             }
 
             return $Response['redirect_location'];
+        }
+
+        /**
+         * Attempts to get the access token once the user has authenticated, will return null
+         * when the user hasn't authenticated yet. Otherwise it will return a string which
+         * contains the Access Token
+         *
+         * @param string $request_token
+         * @return string|null
+         * @throws BadResponseException
+         * @throws CoaAuthenticationException
+         * @throws RequestFailedException
+         * @throws UnsupportedAuthMethodException
+         */
+        public function getAccessToken(string $request_token)
+        {
+            $Response = RequestBuilder::sendRequest(
+                'coa',
+                array(
+                    'action' => "get_access_token",
+                ),
+                array(
+                    'application_id' => COA_SNIFFLE_APP_PUBLIC_ID,
+                    'secret_key' => COA_SNIFFLE_APP_SECRET_KEY,
+                    'request_token' => $request_token
+                )
+            );
+
+            $ResponseJson = json_decode($Response['content'], true);
+            if($ResponseJson == false)
+            {
+                throw new BadResponseException();
+            }
+
+            if($ResponseJson['status'] == false)
+            {
+                if($ResponseJson['error_code'] == 41)
+                {
+                    return null;
+                }
+
+                throw new CoaAuthenticationException($ResponseJson['error_code']);
+            }
+
+            return $ResponseJson['access_token'];
         }
 
         /**
