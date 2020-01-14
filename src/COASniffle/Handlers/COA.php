@@ -32,8 +32,32 @@
             $this->COASniffle = $COASniffle;
         }
 
+        public function createAuthenticationRequest()
+        {
+            if(COA_SNIFFLE_APP_TYPE == ApplicationType::Redirect)
+            {
+                if($redirect == "None")
+                {
+                    throw new RedirectParameterMissingException();
+                }
+
+                if(filter_var($redirect, FILTER_VALIDATE_URL) == false)
+                {
+                    throw new InvalidRedirectLocationException();
+                }
+            }
+        }
+
         /**
-         * Requests for authentication and Returns the location for the user to authenticate to
+         * Requests for authentication and Returns the location for the user to authenticate to.
+         *
+         * This is the same as getAuthenticationURL() but it actually processes the
+         * request to the URL you get from getAuthenticationURL() to get the redirect
+         * URL that the user should open.
+         *
+         * This function isn't supposed to be used, instead use createAuthenticationRequest()
+         * which accomplishes the same as this but you also get the Request Token instead of
+         * just the authentication URL
          *
          * @param bool $include_host
          * @param string $redirect
@@ -84,6 +108,9 @@
         /**
          * Builds the authentication request URL only where the request token would be created
          * upon request
+         *
+         * Useful for adding the URL to a href value of a button/link which allows the user
+         * to request for authentication to your Application
          *
          * @param string $redirect
          * @return string
