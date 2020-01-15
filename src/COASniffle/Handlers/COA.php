@@ -318,4 +318,9 @@
             $GetParameters = '?' . http_build_query($Parameters);
             return COA_SNIFFLE_ENDPOINT . '/auth/coa' . $GetParameters;
         }
+
+        public function getAvatarUrl(string $resource): string
+        {
+
+        }
     }
