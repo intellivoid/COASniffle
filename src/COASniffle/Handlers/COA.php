@@ -335,4 +335,5 @@
 
             return COA_SNIFFLE_ENDPOINT . '/user/contents/public/avatar?' . http_build_query($Parameters);
         }
+
     }
