@@ -339,8 +339,8 @@
 
         /**
          * @param string $access_token
-         * @param string $plan_id
-         * @param string $promotion_id
+         * @param string $plan_name
+         * @param string $promotion_code
          * @return SubscriptionPurchaseResults
          * @throws BadResponseException
          * @throws CoaAuthenticationException
