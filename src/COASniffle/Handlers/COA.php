@@ -347,18 +347,18 @@
          * @throws RequestFailedException
          * @throws UnsupportedAuthMethodException
          */
-        public function createSubscription(string $access_token, string $plan_id, string $promotion_id="None"): SubscriptionPurchaseResults
+        public function createSubscription(string $access_token, string $plan_name, string $promotion_code="None"): SubscriptionPurchaseResults
         {
             $RequestPayload = array(
                 'application_id' => COA_SNIFFLE_APP_PUBLIC_ID,
                 'secret_key' => COA_SNIFFLE_APP_SECRET_KEY,
                 'access_token' => $access_token,
-                'plan_id' => $plan_id,
+                'plan_name' => $plan_name,
             );
 
-            if($promotion_id !== "None")
+            if($promotion_code !== "None")
             {
-                $RequestPayload['promotion_id'] = $promotion_id;
+                $RequestPayload['promotion_code'] = $promotion_code;
             }
 
             $Response = RequestBuilder::sendRequest(
@@ -369,8 +369,6 @@
                 $RequestPayload
             );
 
-            var_dump($RequestPayload);
-            var_dump($Response);
             $ResponseJson = json_decode($Response['content'], true);
             if($ResponseJson == false)
             {

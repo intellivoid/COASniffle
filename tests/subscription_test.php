@@ -146,6 +146,6 @@ use COASniffle\Exceptions\UnsupportedAuthMethodException;
     print("Access Token: " . $AccessToken . PHP_EOL);
     print(PHP_EOL);
 
-    $Results = $COASniffle->getCOA()->createSubscription($AccessToken, '1ad5be0df411a1fb62758b4c54690d0a702b4955b54dd22115416fa7b1ce51b4a084818d');
+    $Results = $COASniffle->getCOA()->createSubscription($AccessToken, 'basic', 'FRIENDLYTG');
 
     print(json_encode($Results->toArray(), JSON_PRETTY_PRINT));
