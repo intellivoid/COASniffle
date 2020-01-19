@@ -12,6 +12,7 @@
     use COASniffle\Exceptions\RedirectParameterMissingException;
     use COASniffle\Exceptions\RequestFailedException;
     use COASniffle\Exceptions\UnsupportedAuthMethodException;
+    use COASniffle\Objects\AccessInformation;
     use COASniffle\Objects\Permissions;
     use COASniffle\Objects\SubscriptionPurchaseResults;
     use COASniffle\Objects\UserInformation;
@@ -276,12 +277,22 @@
             return UserInformation::fromArray($ResponseJson['user_information']);
         }
 
-        public function getAccess(string $access_token): UserInformation
+        /**
+         * Gets the access information
+         *
+         * @param string $access_token
+         * @return AccessInformation
+         * @throws BadResponseException
+         * @throws CoaAuthenticationException
+         * @throws RequestFailedException
+         * @throws UnsupportedAuthMethodException
+         */
+        public function getAccess(string $access_token): AccessInformation
         {
             $Response = RequestBuilder::sendRequest(
                 'coa',
                 array(
-                    'action' => "get_user",
+                    'action' => "get_access",
                 ),
                 array(
                     'application_id' => COA_SNIFFLE_APP_PUBLIC_ID,
@@ -301,7 +312,7 @@
                 throw new CoaAuthenticationException($ResponseJson['error_code']);
             }
 
-            return UserInformation::fromArray($ResponseJson['user_information']);
+            return AccessInformation::fromArray($ResponseJson['user_information']);
         }
 
         /**
