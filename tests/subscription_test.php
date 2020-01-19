@@ -14,8 +14,8 @@ use COASniffle\Exceptions\UnsupportedAuthMethodException;
     require($SourceDirectory . DIRECTORY_SEPARATOR . 'COASniffle' . DIRECTORY_SEPARATOR . 'COASniffle.php');
 
     $ApplicationConfiguration = array(
-        "PublicID" => "APP4e89d34d6756306f5b90684922458a6a3db0ee38a06147e08f4692ddda4c9094920bcd5d",
-        "SecretKey" => "0f2135ff26f0ee4c19ce1fd0ecd6ad70cf50ab6160f089186f0d9cf9a7348ef84c09536f",
+        "PublicID" => "APPd2a8337d09d1675ceddc54da0b484abeb03953d6a7b832a0a34acc169ef8b560212191ce",
+        "SecretKey" => "651c586650813efc5f0592dc4a61c533ae7059521cfcbab585cc152377ec8f8234f39663",
         "Type" => ApplicationType::ApplicationPlaceholder,
         "Redirect" => "http://localhost:5002/"
     );
@@ -146,6 +146,7 @@ use COASniffle\Exceptions\UnsupportedAuthMethodException;
     print("Access Token: " . $AccessToken . PHP_EOL);
     print(PHP_EOL);
 
-    $Results = $COASniffle->getCOA()->createSubscription($AccessToken, 'basic', 'FRIENDLYTG');
+    $Results = $COASniffle->getCOA()->createSubscription($AccessToken, 'Basic', 'FRIENDLYTG');
 
-    print(json_encode($Results->toArray(), JSON_PRETTY_PRINT));
+    print(json_encode($Results->toArray(), JSON_PRETTY_PRINT) . PHP_EOL);
+    print("Purchase URL: " . $Results->ProcessTransactionURL);

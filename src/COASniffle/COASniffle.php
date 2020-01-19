@@ -33,6 +33,7 @@
     include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation' . DIRECTORY_SEPARATOR . 'PersonalInformation' . DIRECTORY_SEPARATOR . 'Birthday.php');
     include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation' . DIRECTORY_SEPARATOR . 'PersonalInformation' . DIRECTORY_SEPARATOR . 'FirstName.php');
     include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation' . DIRECTORY_SEPARATOR . 'PersonalInformation' . DIRECTORY_SEPARATOR . 'LastName.php');
+    include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'AccessInformation.php');
     include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'Permissions.php');
     include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'SubscriptionPurchaseResults.php');
     include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation.php');

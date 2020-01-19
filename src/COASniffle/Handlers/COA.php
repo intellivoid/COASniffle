@@ -276,6 +276,34 @@
             return UserInformation::fromArray($ResponseJson['user_information']);
         }
 
+        public function getAccess(string $access_token): UserInformation
+        {
+            $Response = RequestBuilder::sendRequest(
+                'coa',
+                array(
+                    'action' => "get_user",
+                ),
+                array(
+                    'application_id' => COA_SNIFFLE_APP_PUBLIC_ID,
+                    'secret_key' => COA_SNIFFLE_APP_SECRET_KEY,
+                    'access_token' => $access_token
+                )
+            );
+
+            $ResponseJson = json_decode($Response['content'], true);
+            if($ResponseJson == false)
+            {
+                throw new BadResponseException();
+            }
+
+            if($ResponseJson['status'] == false)
+            {
+                throw new CoaAuthenticationException($ResponseJson['error_code']);
+            }
+
+            return UserInformation::fromArray($ResponseJson['user_information']);
+        }
+
         /**
          * Builds the authentication request URL only where the request token would be created
          * upon request
