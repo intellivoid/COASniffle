@@ -421,4 +421,43 @@
 
             return SubscriptionPurchaseResults::fromArray($ResponseJson['payload']);
         }
+
+        /**
+         * Processes the subscription billing and returns true if payment was processed
+         * or returns false when the payment does not need to be processed
+         *
+         * @param int $subscription_id
+         * @return bool
+         * @throws BadResponseException
+         * @throws CoaAuthenticationException
+         * @throws RequestFailedException
+         * @throws UnsupportedAuthMethodException
+         */
+        public static function processSubscriptionBilling(int $subscription_id): bool
+        {
+            $RequestPayload = array(
+                'subscription_id' => $subscription_id
+            );
+
+            $Response = RequestBuilder::sendRequest(
+                'coa',
+                array(
+                    'action' => "process_subscription_billing",
+                ),
+                $RequestPayload
+            );
+
+            $ResponseJson = json_decode($Response['content'], true);
+            if($ResponseJson == false)
+            {
+                throw new BadResponseException();
+            }
+
+            if($ResponseJson['status'] == false)
+            {
+                throw new CoaAuthenticationException($ResponseJson['error_code']);
+            }
+
+            return (bool)$ResponseJson['payment_processed'];
+        }
     }
