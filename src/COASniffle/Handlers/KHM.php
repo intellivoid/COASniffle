@@ -47,7 +47,20 @@
 
             if($ResponseJson['status'] == false)
             {
-                throw new KhmException($Response['content'], $Parameters);
+                $StatusCode = 0;
+                $ErrorMessage = "Unknown";
+
+                if(isset($ResponseJson['status_code']))
+                {
+                    $StatusCode = (int)$ResponseJson['status_code'];
+                }
+
+                if(isset($ResponseJson['message']))
+                {
+                    $ErrorMessage = $ResponseJson['message'];
+                }
+
+                throw new KhmException($Response['content'], $Parameters, $StatusCode, $ErrorMessage);
             }
 
             return $ResponseJson['host_id'];

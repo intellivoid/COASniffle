@@ -7,10 +7,10 @@
     use Exception;
 
     /**
-     * Class KhmException
+     * Class OtlException
      * @package COASniffle\Exceptions
      */
-    class KhmException extends Exception
+    class OtlException extends Exception
     {
         /**
          * @var string
@@ -33,7 +33,7 @@
         private $error_message;
 
         /**
-         * KhmException constructor.
+         * OtlException constructor.
          * @param string $response_raw
          * @param array $parameters
          * @param int $status_code
@@ -41,7 +41,7 @@
          */
         public function __construct(string $response_raw, array $parameters, int $status_code, string $message)
         {
-            parent::__construct("There was an error with the KHM response", 0, null);
+            parent::__construct("There was an error with the OTL response", 0, null);
             $this->response_raw = $response_raw;
             $this->parameters = $parameters;
             $this->status_code = $status_code;
