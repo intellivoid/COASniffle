@@ -23,6 +23,8 @@
     include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'UnsupportedAuthMethodException.php');
 
     include_once($LocalDirectory . 'Handlers' . DIRECTORY_SEPARATOR . 'COA.php');
+    include_once($LocalDirectory . 'Handlers' . DIRECTORY_SEPARATOR . 'KHM.php');
+    include_once($LocalDirectory . 'Handlers' . DIRECTORY_SEPARATOR . 'OTL.php');
 
     include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'SubscriptionPurchaseResults' . DIRECTORY_SEPARATOR . 'SubscriptionDetails.php');
     include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'SubscriptionPurchaseResults' . DIRECTORY_SEPARATOR . 'SubscriptionPlan.php');
