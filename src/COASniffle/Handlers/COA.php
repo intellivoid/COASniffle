@@ -377,6 +377,23 @@
         }
 
         /**
+         * Gets the URL for a brand
+         *
+         * @param string $resource
+         * @param string $userPublicId
+         * @return string
+         */
+        public static function getBrandUrl(string $resource, string $userPublicId): string
+        {
+            $Parameters = array(
+                'app_id' => $userPublicId,
+                'resource' => $resource
+            );
+
+            return COA_SNIFFLE_ENDPOINT . '/user/contents/public/application?' . http_build_query($Parameters);
+        }
+
+        /**
          * @param string $access_token
          * @param string $plan_name
          * @param string $promotion_code
