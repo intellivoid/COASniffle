@@ -47,4 +47,36 @@
             $this->status_code = $status_code;
             $this->error_message = $message;
         }
+
+        /**
+         * @return string
+         */
+        public function getResponseRaw(): string
+        {
+            return $this->response_raw;
+        }
+
+        /**
+         * @return array
+         */
+        public function getParameters(): array
+        {
+            return $this->parameters;
+        }
+
+        /**
+         * @return int
+         */
+        public function getStatusCode(): int
+        {
+            return $this->status_code;
+        }
+
+        /**
+         * @return string
+         */
+        public function getErrorMessage(): string
+        {
+            return $this->error_message;
+        }
     }
