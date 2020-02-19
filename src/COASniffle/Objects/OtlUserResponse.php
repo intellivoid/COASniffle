@@ -12,7 +12,7 @@
         /**
          * Internal private ID of the user
          *
-         * @var int
+         * @var string
          */
         public $ID;
 
@@ -52,7 +52,7 @@
         public function toArray(): array
         {
             return array(
-                'id' => (int)$this->ID,
+                'id' => $this->ID,
                 'username' => $this->Username,
                 'email' => $this->Email,
                 'avatars' => $this->Avatars,
@@ -72,7 +72,7 @@
 
             if(isset($data['id']))
             {
-                $OtlUserObject->ID = (int)$data['id'];
+                $OtlUserObject->ID = $data['id'];
             }
 
             if(isset($data['username']))
