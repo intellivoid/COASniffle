@@ -19,6 +19,7 @@
     include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'CoaAuthenticationException.php');
     include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'InvalidRedirectLocationException.php');
     include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'KhmException.php');
+    include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'OtlException.php.php');
     include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'RedirectParameterMissingException.php');
     include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'RequestFailedException.php');
     include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'UnsupportedAuthMethodException.php');
@@ -37,6 +38,7 @@
     include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation' . DIRECTORY_SEPARATOR . 'PersonalInformation' . DIRECTORY_SEPARATOR . 'FirstName.php');
     include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation' . DIRECTORY_SEPARATOR . 'PersonalInformation' . DIRECTORY_SEPARATOR . 'LastName.php');
     include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'AccessInformation.php');
+    include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'OtlUserResponse.php');
     include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'Permissions.php');
     include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'SubscriptionPurchaseResults.php');
     include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation.php');
