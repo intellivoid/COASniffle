@@ -410,13 +410,17 @@
                 'application_id' => COA_SNIFFLE_APP_PUBLIC_ID,
                 'secret_key' => COA_SNIFFLE_APP_SECRET_KEY,
                 'access_token' => $access_token,
-                'redirect' => $redirect,
                 'plan_name' => $plan_name,
             );
 
             if($promotion_code !== "None")
             {
                 $RequestPayload['promotion_code'] = $promotion_code;
+            }
+
+            if($redirect !== "None")
+            {
+                $RequestPayload['redirect'] = $redirect;
             }
 
             $Response = RequestBuilder::sendRequest(
