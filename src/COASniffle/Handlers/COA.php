@@ -396,6 +396,7 @@
         /**
          * @param string $access_token
          * @param string $plan_name
+         * @param string $redirect
          * @param string $promotion_code
          * @return SubscriptionPurchaseResults
          * @throws BadResponseException
@@ -403,12 +404,13 @@
          * @throws RequestFailedException
          * @throws UnsupportedAuthMethodException
          */
-        public function createSubscription(string $access_token, string $plan_name, string $promotion_code="None"): SubscriptionPurchaseResults
+        public function createSubscription(string $access_token, string $plan_name, string $redirect="None", string $promotion_code="None"): SubscriptionPurchaseResults
         {
             $RequestPayload = array(
                 'application_id' => COA_SNIFFLE_APP_PUBLIC_ID,
                 'secret_key' => COA_SNIFFLE_APP_SECRET_KEY,
                 'access_token' => $access_token,
+                'redirect' => $redirect,
                 'plan_name' => $plan_name,
             );
 
