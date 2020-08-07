@@ -1,0 +1,154 @@
+{
+    "package": {
+        "package_name": "net.intellivoid.coa_sniffle",
+        "name": "COSniffle",
+        "version": "1.0.0.6",
+        "author": "Zi Xing Narrakas",
+        "organization": "Intellivoid",
+        "description": "COA Authentication Library for Intellivoid Accounts",
+        "url": "https://github.com/intellivoid/COASniffle",
+        "dependencies": [
+            {"package": "net.intellivoid.acm", "version": "latest", "required": true}
+        ],
+        "configuration": {
+            "autoload_method": "indexed",
+            "main": null,
+            "post_installation": [],
+            "pre_installation": []
+        }
+    },
+    "components": [
+        {
+            "required": true,
+            "file": "Abstracts/ApplicationType.php"
+        },
+        {
+            "required": true,
+            "file": "Abstracts/AvatarResourceName.php"
+        },
+        {
+            "required": true,
+            "file": "AutoConfig.php"
+        },
+        {
+            "required": true,
+            "file": "COASniffle.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/ApplicationAlreadyDefinedException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/BadResponseException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/CoaAuthenticationException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/InvalidRedirectLocationException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/KhmException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/OtlException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/RedirectParameterMissingException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/RequestFailedException.php"
+        },
+        {
+            "required": true,
+            "file": "Exceptions/UnsupportedAuthMethodException.php"
+        },
+        {
+            "required": true,
+            "file": "Handlers/COA.php"
+        },
+        {
+            "required": true,
+            "file": "Handlers/KHM.php"
+        },
+        {
+            "required": true,
+            "file": "Handlers/OTL.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/AccessInformation.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/OtlUserResponse.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/Permissions.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/SubscriptionPurchaseResults/SubscriptionDetails.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/SubscriptionPurchaseResults/SubscriptionPlan.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/SubscriptionPurchaseResults/SubscriptionPlanPromotion.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/SubscriptionPurchaseResults.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/UserInformation/Avatar.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/UserInformation/EmailAddress.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/UserInformation/PersonalInformation/Birthday.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/UserInformation/PersonalInformation/FirstName.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/UserInformation/PersonalInformation/LastName.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/UserInformation/PersonalInformation.php"
+        },
+        {
+            "required": true,
+            "file": "Objects/UserInformation.php"
+        },
+        {
+            "required": true,
+            "file": "Utilities/ErrorResolver.php"
+        },
+        {
+            "required": true,
+            "file": "Utilities/RequestBuilder.php"
+        }
+    ],
+    "files": [
+        "coasniffle.json",
+        "configuration.ini"
+    ]
+}

@@ -11,48 +11,57 @@
 
     $LocalDirectory = __DIR__ . DIRECTORY_SEPARATOR;
 
-    include_once($LocalDirectory . 'Abstracts' . DIRECTORY_SEPARATOR . 'ApplicationType.php');
-    include_once($LocalDirectory . 'Abstracts' . DIRECTORY_SEPARATOR . 'AvatarResourceName.php');
+    if(defined("PPM") == false)
+    {
+        include_once($LocalDirectory . 'Abstracts' . DIRECTORY_SEPARATOR . 'ApplicationType.php');
+        include_once($LocalDirectory . 'Abstracts' . DIRECTORY_SEPARATOR . 'AvatarResourceName.php');
 
-    include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'ApplicationAlreadyDefinedException.php');
-    include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'BadResponseException.php');
-    include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'CoaAuthenticationException.php');
-    include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'InvalidRedirectLocationException.php');
-    include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'KhmException.php');
-    include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'OtlException.php');
-    include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'RedirectParameterMissingException.php');
-    include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'RequestFailedException.php');
-    include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'UnsupportedAuthMethodException.php');
+        include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'ApplicationAlreadyDefinedException.php');
+        include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'BadResponseException.php');
+        include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'CoaAuthenticationException.php');
+        include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'InvalidRedirectLocationException.php');
+        include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'KhmException.php');
+        include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'OtlException.php');
+        include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'RedirectParameterMissingException.php');
+        include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'RequestFailedException.php');
+        include_once($LocalDirectory . 'Exceptions' . DIRECTORY_SEPARATOR . 'UnsupportedAuthMethodException.php');
 
-    include_once($LocalDirectory . 'Handlers' . DIRECTORY_SEPARATOR . 'COA.php');
-    include_once($LocalDirectory . 'Handlers' . DIRECTORY_SEPARATOR . 'KHM.php');
-    include_once($LocalDirectory . 'Handlers' . DIRECTORY_SEPARATOR . 'OTL.php');
+        include_once($LocalDirectory . 'Handlers' . DIRECTORY_SEPARATOR . 'COA.php');
+        include_once($LocalDirectory . 'Handlers' . DIRECTORY_SEPARATOR . 'KHM.php');
+        include_once($LocalDirectory . 'Handlers' . DIRECTORY_SEPARATOR . 'OTL.php');
 
-    include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'SubscriptionPurchaseResults' . DIRECTORY_SEPARATOR . 'SubscriptionDetails.php');
-    include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'SubscriptionPurchaseResults' . DIRECTORY_SEPARATOR . 'SubscriptionPlan.php');
-    include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'SubscriptionPurchaseResults' . DIRECTORY_SEPARATOR . 'SubscriptionPlanPromotion.php');
-    include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation' . DIRECTORY_SEPARATOR . 'Avatar.php');
-    include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation' . DIRECTORY_SEPARATOR . 'EmailAddress.php');
-    include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation' . DIRECTORY_SEPARATOR . 'PersonalInformation.php');
-    include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation' . DIRECTORY_SEPARATOR . 'PersonalInformation' . DIRECTORY_SEPARATOR . 'Birthday.php');
-    include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation' . DIRECTORY_SEPARATOR . 'PersonalInformation' . DIRECTORY_SEPARATOR . 'FirstName.php');
-    include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation' . DIRECTORY_SEPARATOR . 'PersonalInformation' . DIRECTORY_SEPARATOR . 'LastName.php');
-    include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'AccessInformation.php');
-    include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'OtlUserResponse.php');
-    include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'Permissions.php');
-    include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'SubscriptionPurchaseResults.php');
-    include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation.php');
+        include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'SubscriptionPurchaseResults' . DIRECTORY_SEPARATOR . 'SubscriptionDetails.php');
+        include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'SubscriptionPurchaseResults' . DIRECTORY_SEPARATOR . 'SubscriptionPlan.php');
+        include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'SubscriptionPurchaseResults' . DIRECTORY_SEPARATOR . 'SubscriptionPlanPromotion.php');
+        include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation' . DIRECTORY_SEPARATOR . 'Avatar.php');
+        include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation' . DIRECTORY_SEPARATOR . 'EmailAddress.php');
+        include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation' . DIRECTORY_SEPARATOR . 'PersonalInformation.php');
+        include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation' . DIRECTORY_SEPARATOR . 'PersonalInformation' . DIRECTORY_SEPARATOR . 'Birthday.php');
+        include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation' . DIRECTORY_SEPARATOR . 'PersonalInformation' . DIRECTORY_SEPARATOR . 'FirstName.php');
+        include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation' . DIRECTORY_SEPARATOR . 'PersonalInformation' . DIRECTORY_SEPARATOR . 'LastName.php');
+        include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'AccessInformation.php');
+        include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'OtlUserResponse.php');
+        include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'Permissions.php');
+        include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'SubscriptionPurchaseResults.php');
+        include_once($LocalDirectory . 'Objects' . DIRECTORY_SEPARATOR . 'UserInformation.php');
 
-    include_once($LocalDirectory . 'Utilities' . DIRECTORY_SEPARATOR . 'ErrorResolver.php');
-    include_once($LocalDirectory . 'Utilities' . DIRECTORY_SEPARATOR . 'RequestBuilder.php');
+        include_once($LocalDirectory . 'Utilities' . DIRECTORY_SEPARATOR . 'ErrorResolver.php');
+        include_once($LocalDirectory . 'Utilities' . DIRECTORY_SEPARATOR . 'RequestBuilder.php');
+
+        if(class_exists('acm\acm') == false)
+        {
+            /** @noinspection PhpIncludeInspection */
+            include_once(__DIR__ . DIRECTORY_SEPARATOR . 'acm' . DIRECTORY_SEPARATOR . 'acm.php');
+        }
+    }
 
     include_once($LocalDirectory . 'AutoConfig.php');
 
-    if(class_exists('acm\acm') == false)
-    {
-        include_once(__DIR__ . DIRECTORY_SEPARATOR . 'acm' . DIRECTORY_SEPARATOR . 'acm.php');
-    }
 
+    /**
+     * Class COASniffle
+     * @package COASniffle
+     */
     class COASniffle
     {
         /**
