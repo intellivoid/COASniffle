@@ -2,7 +2,7 @@
     "package": {
         "package_name": "net.intellivoid.coa_sniffle",
         "name": "COSniffle",
-        "version": "1.0.0.6",
+        "version": "1.0.0.7",
         "author": "Zi Xing Narrakas",
         "organization": "Intellivoid",
         "description": "COA Authentication Library for Intellivoid Accounts",
