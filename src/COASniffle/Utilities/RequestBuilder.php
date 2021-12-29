@@ -55,6 +55,7 @@
             curl_setopt($CurlClient, CURLOPT_POSTFIELDS, $payload);
             curl_setopt($CurlClient, CURLOPT_HEADER, 1);
             curl_setopt($CurlClient, CURLOPT_FOLLOWLOCATION, 0);
+            curl_setopt($CurlClient, CURLOPT_USERAGENT, 'CoaSniffle/1.0');
             $CurlResponse = curl_exec($CurlClient);
 
             if(curl_errno($CurlClient))
